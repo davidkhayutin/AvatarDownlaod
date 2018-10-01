@@ -1,0 +1,22 @@
+{
+  "name": "avatardownload",
+  "version": "1.0.0",
+  "description": "## Problem Statement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidkhayutin/AvatarDownlaod.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidkhayutin/AvatarDownlaod/issues"
+  },
+  "homepage": "https://github.com/davidkhayutin/AvatarDownlaod#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
