@@ -1,3 +1,4 @@
+var params = process.argv.slice(2);
 var request = require('request');
 var secrets = require('./secrets.js')
 var fs = require('fs');
@@ -7,7 +8,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
   var options = {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers: {
-      'User-Agent': 'request'
+      'User-Agent': 'request',
+      'Authorization': "token " + secrets.GITHUB_TOKEN
     }
   };
 
@@ -22,12 +24,16 @@ function downloadImageByURL(url, filePath) {
    .on('error', function (err) {                                   // Note 2
          throw err;
        })
-   .pipe(fs.createWriteStream('./' + filePath));               // Note 4
+   .pipe(fs.createWriteStream("./avatars/" + filePath + '.jpg'));               // Note 4
 }
 
-
-getRepoContributors("jquery", "jquery", function(err, result) {
-  result.forEach(function(data){
-    downloadImageByURL(data);
+function results(param){
+  param.forEach(function(data){
+  var filePath = data.login
+  downloadImageByURL(data.avatar_url, filePath);
+  });
+}
+getRepoContributors(params[0], params[1], function(err, result) {
+  results(result)
   console.log("Errors:", err);
-});
+  });
